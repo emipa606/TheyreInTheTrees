@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <InterceptPercent_Title>Intercept Percent</InterceptPercent_Title>
+  <InterceptPercent_Desc>Chance that ToWild shots hit cover per cover effictiveness.</InterceptPercent_Desc>
+  <TreeCoverEff_Title>Tree Cover Effectiveness</TreeCoverEff_Title>
+  <TreeCoverEff_Desc>Percent to set tree cover to.</TreeCoverEff_Desc>
+  <TreeCoverEffType_title>Tree Cover Math</TreeCoverEffType_title>
+  <TreeCoverEffType_desc>What math to use to set cover effectiveness.
+	Less: No CoverEff shrink
+	All: All CoverEff set
+	Add: Add to CoverEff
+	No: CoverEff untouched</TreeCoverEffType_desc>
+  <enumSetting_LessThan>Less Than</enumSetting_LessThan>
+  <enumSetting_All>All</enumSetting_All>
+  <enumSetting_Addition>Addition</enumSetting_Addition>
+  <enumSetting_None>No Change</enumSetting_None>
+</LanguageData>
