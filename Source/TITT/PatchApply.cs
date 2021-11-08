@@ -20,8 +20,18 @@ namespace TITT.Main
             {
                 foreach (var item in ObjGets.GetListAndTruncate(ObjGets.TreeList))
                 {
-                    if ((item != null) & (ModMain.TreeCoverEffType ==
-                                          ModMain.TreeCoverEffEnum.Addition))
+                    if (item == null)
+                    {
+                        continue;
+                    }
+
+                    if (!ObjGets.OrigCover.ContainsKey(item))
+                    {
+                        continue;
+                    }
+
+                    //Log.Message(item.defName);
+                    if (ModMain.TreeCoverEffType == ModMain.TreeCoverEffEnum.Addition)
                     {
                         item.fillPercent =
                             Math.Max(Math.Min(ObjGets.OrigCover[item] + (ModMain.TreeCoverEff / 100f), 0.7f),
@@ -29,16 +39,13 @@ namespace TITT.Main
                         continue;
                     }
 
-                    if ((item == null || !(ObjGets.OrigCover[item] < ModMain.TreeCoverEff / 100f)) &&
+                    if (!(ObjGets.OrigCover[item] < ModMain.TreeCoverEff / 100f) &&
                         ModMain.TreeCoverEffType != ModMain.TreeCoverEffEnum.All)
                     {
                         continue;
                     }
 
-                    if (item != null)
-                    {
-                        item.fillPercent = Math.Max(Math.Min(ModMain.TreeCoverEff / 100f, 0.7f), 0.05f);
-                    }
+                    item.fillPercent = Math.Max(Math.Min(ModMain.TreeCoverEff / 100f, 0.7f), 0.05f);
                 }
 
                 Log.Message("CB84.TheyreInTheTrees: Done.");

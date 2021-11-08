@@ -49,12 +49,12 @@ namespace TITT.Tools
                 }
                 catch (ArgumentOutOfRangeException)
                 {
-                    Log.Message("OutOfRange");
+                    //Log.Message("OutOfRange");
                     break;
                 }
             }
 
-            Log.Message("ReturningList");
+            //Log.Message("ReturningList");
             return list2;
         }
 

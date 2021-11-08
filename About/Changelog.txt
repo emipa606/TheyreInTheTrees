@@ -1,4 +1,7 @@
 # Changelog for TheyreInTheTrees
 
+1.0.1.0 - Fixed an issue with trees that do not have a covervalue from the start.
+
+
 1.0.0.0 - First publish
 
