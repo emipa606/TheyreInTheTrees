@@ -1,45 +1,61 @@
-using HugsLib;
-using HugsLib.Settings;
-using TITT.Tools;
+using System;
+using System.IO;
+using System.Xml.Linq;
 using Verse;
 
-namespace TITT.Main
+namespace TITT;
+
+[StaticConstructorOnStartup]
+public static class ModMain
 {
-    public class ModMain : ModBase
+    public enum TreeCoverEffEnum
     {
-        internal static SettingHandle<double> InterceptPercent;
+        LessThan,
+        All,
+        Addition,
+        None
+    }
 
-        internal static SettingHandle<int> TreeCoverEff;
-
-        internal static SettingHandle<TreeCoverEffEnum> TreeCoverEffType;
-
-        public override string ModIdentifier => "TheyreInTheTrees";
-
-        public override void DefsLoaded()
+    static ModMain()
+    {
+        PatchApply.Apply();
+        var hugsLibConfig = Path.Combine(GenFilePaths.SaveDataFolderPath, Path.Combine("HugsLib", "ModSettings.xml"));
+        if (!new FileInfo(hugsLibConfig).Exists)
         {
-            InterceptPercent = Settings.GetHandle("Input_InterceptPercent", "InterceptPercent_Title".Translate(),
-                "InterceptPercent_Desc".Translate(), 0.15);
-            TreeCoverEff = Settings.GetHandle("Input_TreeCoverEff", "TreeCoverEff_Title".Translate(),
-                "TreeCoverEff_Desc".Translate(), 35);
-            TreeCoverEffType = Settings.GetHandle("Input_TreeCoverEffType", "TreeCoverEffType_title".Translate(),
-                "TreeCoverEffType_desc".Translate(), TreeCoverEffEnum.LessThan, null, "enumSetting_");
-            PatchApply.Apply();
+            return;
         }
 
-        public override void SettingsChanged()
+        var xml = XDocument.Load(hugsLibConfig);
+
+        var modSettings = xml.Root?.Element("TheyreInTheTrees");
+        if (modSettings == null)
         {
-            Log.Message("CB84.TheyreInTheTrees: Settings Changed.");
-            Log.Message(DynamVal.InterceptPercent.ToString());
-            base.SettingsChanged();
-            PatchApply.Apply();
+            return;
         }
 
-        internal enum TreeCoverEffEnum
+        foreach (var modSetting in modSettings.Elements())
         {
-            LessThan,
-            All,
-            Addition,
-            None
+            if (modSetting.Name == "Input_InterceptPercent")
+            {
+                TITTMod.instance.Settings.InterceptPercent = float.Parse(modSetting.Value);
+            }
+
+            if (modSetting.Name == "Input_TreeCoverEff")
+            {
+                TITTMod.instance.Settings.TreeCoverEff = int.Parse(modSetting.Value) / 100f;
+            }
+
+            if (modSetting.Name == "Input_TreeCoverEffType")
+            {
+                TITTMod.instance.Settings.TreeCoverEfficencyType =
+                    (TreeCoverEffEnum)Enum.Parse(typeof(TreeCoverEffEnum), modSetting.Value);
+            }
         }
+
+        xml.Root.Element("TheyreInTheTrees")?.Remove();
+        xml.Save(hugsLibConfig);
+
+        Log.Message("[TheyreInTheTrees]: Imported old HugLib-settings");
+        PatchApply.Apply();
     }
 }

@@ -1,8 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
   <InterceptPercent_Title>Intercept Percent</InterceptPercent_Title>
+  <InterceptPercent_Title_New>Intercept Percent: {0}</InterceptPercent_Title_New>
   <InterceptPercent_Desc>Chance that ToWild shots hit cover per cover effictiveness.</InterceptPercent_Desc>
   <TreeCoverEff_Title>Tree Cover Effectiveness</TreeCoverEff_Title>
+  <TreeCoverEff_Title_New>Tree Cover Effectiveness: {0}</TreeCoverEff_Title_New>
   <TreeCoverEff_Desc>Percent to set tree cover to.</TreeCoverEff_Desc>
   <TreeCoverEffType_title>Tree Cover Math</TreeCoverEffType_title>
   <TreeCoverEffType_desc>What math to use to set cover effectiveness.

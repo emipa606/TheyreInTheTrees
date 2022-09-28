@@ -1,5 +1,8 @@
 # Changelog for TheyreInTheTrees
 
+1.3.1 - Migrated from old HugsLib settings
+
+
 1.0.1.0 - Fixed an issue with trees that do not have a covervalue from the start.
 
 
