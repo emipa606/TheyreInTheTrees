@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Mlie;
+using UnityEngine;
 using Verse;
 
 namespace TITT;
@@ -10,6 +11,8 @@ internal class TITTMod : Mod
     ///     The instance of the settings to be read by the mod
     /// </summary>
     public static TITTMod instance;
+
+    private static string currentVersion;
 
     /// <summary>
     ///     The private settings
@@ -23,6 +26,9 @@ internal class TITTMod : Mod
     public TITTMod(ModContentPack content) : base(content)
     {
         instance = this;
+        currentVersion =
+            VersionFromManifest.GetVersionFromModMetaData(
+                ModLister.GetActiveModWithIdentifier("Mlie.TheyreInTheTrees"));
     }
 
     /// <summary>
@@ -96,6 +102,14 @@ internal class TITTMod : Mod
                 Settings.TreeCoverEfficencyType == ModMain.TreeCoverEffEnum.None))
         {
             Settings.TreeCoverEfficencyType = ModMain.TreeCoverEffEnum.None;
+        }
+
+        if (currentVersion != null)
+        {
+            listing_Standard.Gap();
+            GUI.contentColor = Color.gray;
+            listing_Standard.Label("TheyreInTheTreesVersion_title".Translate(currentVersion));
+            GUI.contentColor = Color.white;
         }
 
         listing_Standard.End();

@@ -5,6 +5,8 @@
 Update of ChickenBites84s mod
 https://steamcommunity.com/sharedfiles/filedetails/?id=2201601092
 
+- Migrated from old HugsLib settings
+
 ![Image](https://i.imgur.com/pufA0kM.png)
 
 	
