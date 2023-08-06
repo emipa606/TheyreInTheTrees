@@ -17,7 +17,7 @@ internal class TITTMod : Mod
     /// <summary>
     ///     The private settings
     /// </summary>
-    private TITTSettings settings;
+    public readonly TITTSettings Settings;
 
     /// <summary>
     ///     Constructor
@@ -27,25 +27,8 @@ internal class TITTMod : Mod
     {
         instance = this;
         currentVersion =
-            VersionFromManifest.GetVersionFromModMetaData(
-                ModLister.GetActiveModWithIdentifier("Mlie.TheyreInTheTrees"));
-    }
-
-    /// <summary>
-    ///     The instance-settings for the mod
-    /// </summary>
-    internal TITTSettings Settings
-    {
-        get
-        {
-            if (settings == null)
-            {
-                settings = GetSettings<TITTSettings>();
-            }
-
-            return settings;
-        }
-        set => settings = value;
+            VersionFromManifest.GetVersionFromModMetaData(content.ModMetaData);
+        Settings = GetSettings<TITTSettings>();
     }
 
     /// <summary>
@@ -69,13 +52,14 @@ internal class TITTMod : Mod
         listing_Standard.Gap();
         listing_Standard.Label("InterceptPercent_Title_New".Translate(Settings.InterceptPercent.ToStringPercent()), -1,
             "InterceptPercent_Desc".Translate());
-        Settings.InterceptPercent = Widgets.HorizontalSlider(listing_Standard.GetRect(20), Settings.InterceptPercent, 0,
+        Settings.InterceptPercent = Widgets.HorizontalSlider_NewTemp(listing_Standard.GetRect(20),
+            Settings.InterceptPercent, 0,
             1f,
             false, Settings.InterceptPercent.ToStringPercent());
         listing_Standard.Gap();
         listing_Standard.Label("TreeCoverEff_Title_New".Translate(Settings.TreeCoverEff.ToStringPercent()), -1,
             "TreeCoverEff_Desc".Translate());
-        Settings.TreeCoverEff = Widgets.HorizontalSlider(listing_Standard.GetRect(20), Settings.TreeCoverEff, 0,
+        Settings.TreeCoverEff = Widgets.HorizontalSlider_NewTemp(listing_Standard.GetRect(20), Settings.TreeCoverEff, 0,
             1f,
             false, Settings.TreeCoverEff.ToStringPercent());
         listing_Standard.Gap();

@@ -37,19 +37,20 @@ public static class ObjGets
             {
                 if (num > 200)
                 {
-                    throw;
+                    break;
                 }
             }
             catch (KeyNotFoundException)
             {
                 if (num > 200)
                 {
-                    throw;
+                    break;
                 }
             }
-            catch (ArgumentOutOfRangeException)
+            catch
             {
                 break;
+                // ignored
             }
         }
 
