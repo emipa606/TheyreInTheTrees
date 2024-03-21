@@ -21,7 +21,7 @@ public class PatchApply
                     continue;
                 }
 
-                if (!ObjGets.OrigCover.ContainsKey(item))
+                if (!ObjGets.OrigCover.TryGetValue(item, out var value))
                 {
                     continue;
                 }
@@ -29,7 +29,7 @@ public class PatchApply
                 if (TITTMod.instance.Settings.TreeCoverEfficencyType == ModMain.TreeCoverEffEnum.Addition)
                 {
                     item.fillPercent =
-                        Math.Max(Math.Min(ObjGets.OrigCover[item] + TITTMod.instance.Settings.TreeCoverEff, 0.7f),
+                        Math.Max(Math.Min(value + TITTMod.instance.Settings.TreeCoverEff, 0.7f),
                             0.05f);
                     continue;
                 }
