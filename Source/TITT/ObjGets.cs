@@ -8,16 +8,16 @@ namespace TITT;
 
 public static class ObjGets
 {
-    internal static Dictionary<ThingDef, float> OrigCover = new Dictionary<ThingDef, float>();
+    internal static Dictionary<ThingDef, float> OrigCover = new();
 
-    internal static IEnumerable<ThingDef> PlantList;
+    private static IEnumerable<ThingDef> plantList;
 
     internal static IEnumerable<ThingDef> TreeList;
 
-    internal static List<ThingDef> GetListAndTruncate(IEnumerable<ThingDef> TAKE)
+    internal static List<ThingDef> GetListAndTruncate(IEnumerable<ThingDef> take)
     {
         var num = -1;
-        var list = TAKE?.ToList();
+        var list = take?.ToList();
         var list2 = new List<ThingDef>();
         while (true)
         {
@@ -60,23 +60,21 @@ public static class ObjGets
     internal static void Reset()
     {
         Log.Message("CB84.TheyreInTheTrees: Resetting TreeGets.");
-        PlantList = DefDatabase<ThingDef>.AllDefs.Where(x =>
+        plantList = DefDatabase<ThingDef>.AllDefs.Where(x =>
             x is { IsWeapon: false, category: ThingCategory.Plant } && !x.defName.Contains("Base") &&
             x.defName.Length >= 2);
-        TreeList = PlantList.Where(x => x.defName.Contains("Tree") || x.defName.Contains("tree"));
+        var thingDefs = plantList as ThingDef[] ?? plantList.ToArray();
+        TreeList = thingDefs.Where(x => x.defName.Contains("Tree") || x.defName.Contains("tree"));
         if (OrigCover != null && OrigCover.Any())
         {
             return;
         }
 
-        if (OrigCover == null)
-        {
-            OrigCover = new Dictionary<ThingDef, float>();
-        }
+        OrigCover ??= new Dictionary<ThingDef, float>();
 
         OrigCover.Clear();
-        GetListAndTruncate(PlantList);
-        foreach (var item in GetListAndTruncate(PlantList))
+        GetListAndTruncate(thingDefs);
+        foreach (var item in GetListAndTruncate(thingDefs))
         {
             if (item.IsIngestible & (item.ingestible.foodType == FoodTypeFlags.Tree))
             {

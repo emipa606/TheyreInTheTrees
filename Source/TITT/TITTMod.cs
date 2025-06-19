@@ -10,7 +10,7 @@ internal class TITTMod : Mod
     /// <summary>
     ///     The instance of the settings to be read by the mod
     /// </summary>
-    public static TITTMod instance;
+    public static TITTMod Instance;
 
     private static string currentVersion;
 
@@ -25,7 +25,7 @@ internal class TITTMod : Mod
     /// <param name="content"></param>
     public TITTMod(ModContentPack content) : base(content)
     {
-        instance = this;
+        Instance = this;
         currentVersion =
             VersionFromManifest.GetVersionFromModMetaData(content.ModMetaData);
         Settings = GetSettings<TITTSettings>();
@@ -47,42 +47,42 @@ internal class TITTMod : Mod
     /// <param name="rect"></param>
     public override void DoSettingsWindowContents(Rect rect)
     {
-        var listing_Standard = new Listing_Standard();
-        listing_Standard.Begin(rect);
-        listing_Standard.Gap();
-        listing_Standard.Label("InterceptPercent_Title_New".Translate(Settings.InterceptPercent.ToStringPercent()), -1,
+        var listingStandard = new Listing_Standard();
+        listingStandard.Begin(rect);
+        listingStandard.Gap();
+        listingStandard.Label("InterceptPercent_Title_New".Translate(Settings.InterceptPercent.ToStringPercent()), -1,
             "InterceptPercent_Desc".Translate());
-        Settings.InterceptPercent = Widgets.HorizontalSlider(listing_Standard.GetRect(20),
+        Settings.InterceptPercent = Widgets.HorizontalSlider(listingStandard.GetRect(20),
             Settings.InterceptPercent, 0,
             1f,
             false, Settings.InterceptPercent.ToStringPercent());
-        listing_Standard.Gap();
-        listing_Standard.Label("TreeCoverEff_Title_New".Translate(Settings.TreeCoverEff.ToStringPercent()), -1,
+        listingStandard.Gap();
+        listingStandard.Label("TreeCoverEff_Title_New".Translate(Settings.TreeCoverEff.ToStringPercent()), -1,
             "TreeCoverEff_Desc".Translate());
-        Settings.TreeCoverEff = Widgets.HorizontalSlider(listing_Standard.GetRect(20), Settings.TreeCoverEff, 0,
+        Settings.TreeCoverEff = Widgets.HorizontalSlider(listingStandard.GetRect(20), Settings.TreeCoverEff, 0,
             1f,
             false, Settings.TreeCoverEff.ToStringPercent());
-        listing_Standard.Gap();
-        listing_Standard.Label("TreeCoverEffType_title".Translate(), -1, "TreeCoverEffType_desc".Translate());
-        if (listing_Standard.RadioButton("enumSetting_LessThan".Translate(),
+        listingStandard.Gap();
+        listingStandard.Label("TreeCoverEffType_title".Translate(), -1, "TreeCoverEffType_desc".Translate());
+        if (listingStandard.RadioButton("enumSetting_LessThan".Translate(),
                 Settings.TreeCoverEfficencyType == ModMain.TreeCoverEffEnum.LessThan))
         {
             Settings.TreeCoverEfficencyType = ModMain.TreeCoverEffEnum.LessThan;
         }
 
-        if (listing_Standard.RadioButton("enumSetting_All".Translate(),
+        if (listingStandard.RadioButton("enumSetting_All".Translate(),
                 Settings.TreeCoverEfficencyType == ModMain.TreeCoverEffEnum.All))
         {
             Settings.TreeCoverEfficencyType = ModMain.TreeCoverEffEnum.All;
         }
 
-        if (listing_Standard.RadioButton("enumSetting_Addition".Translate(),
+        if (listingStandard.RadioButton("enumSetting_Addition".Translate(),
                 Settings.TreeCoverEfficencyType == ModMain.TreeCoverEffEnum.Addition))
         {
             Settings.TreeCoverEfficencyType = ModMain.TreeCoverEffEnum.Addition;
         }
 
-        if (listing_Standard.RadioButton("enumSetting_None".Translate(),
+        if (listingStandard.RadioButton("enumSetting_None".Translate(),
                 Settings.TreeCoverEfficencyType == ModMain.TreeCoverEffEnum.None))
         {
             Settings.TreeCoverEfficencyType = ModMain.TreeCoverEffEnum.None;
@@ -90,13 +90,13 @@ internal class TITTMod : Mod
 
         if (currentVersion != null)
         {
-            listing_Standard.Gap();
+            listingStandard.Gap();
             GUI.contentColor = Color.gray;
-            listing_Standard.Label("TheyreInTheTreesVersion_title".Translate(currentVersion));
+            listingStandard.Label("TheyreInTheTreesVersion_title".Translate(currentVersion));
             GUI.contentColor = Color.white;
         }
 
-        listing_Standard.End();
+        listingStandard.End();
     }
 
     public override void WriteSettings()

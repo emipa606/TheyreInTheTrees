@@ -12,7 +12,7 @@ public class PatchApply
             ObjGets.Reset();
         }
 
-        if (TITTMod.instance.Settings.TreeCoverEfficencyType != ModMain.TreeCoverEffEnum.None)
+        if (TITTMod.Instance.Settings.TreeCoverEfficencyType != ModMain.TreeCoverEffEnum.None)
         {
             foreach (var item in ObjGets.GetListAndTruncate(ObjGets.TreeList))
             {
@@ -26,21 +26,21 @@ public class PatchApply
                     continue;
                 }
 
-                if (TITTMod.instance.Settings.TreeCoverEfficencyType == ModMain.TreeCoverEffEnum.Addition)
+                if (TITTMod.Instance.Settings.TreeCoverEfficencyType == ModMain.TreeCoverEffEnum.Addition)
                 {
                     item.fillPercent =
-                        Math.Max(Math.Min(value + TITTMod.instance.Settings.TreeCoverEff, 0.7f),
+                        Math.Max(Math.Min(value + TITTMod.Instance.Settings.TreeCoverEff, 0.7f),
                             0.05f);
                     continue;
                 }
 
-                if (!(ObjGets.OrigCover[item] < TITTMod.instance.Settings.TreeCoverEff) &&
-                    TITTMod.instance.Settings.TreeCoverEfficencyType != ModMain.TreeCoverEffEnum.All)
+                if (!(ObjGets.OrigCover[item] < TITTMod.Instance.Settings.TreeCoverEff) &&
+                    TITTMod.Instance.Settings.TreeCoverEfficencyType != ModMain.TreeCoverEffEnum.All)
                 {
                     continue;
                 }
 
-                item.fillPercent = Math.Max(Math.Min(TITTMod.instance.Settings.TreeCoverEff, 0.7f), 0.05f);
+                item.fillPercent = Math.Max(Math.Min(TITTMod.Instance.Settings.TreeCoverEff, 0.7f), 0.05f);
             }
 
             return;

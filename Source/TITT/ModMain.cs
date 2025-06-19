@@ -37,17 +37,17 @@ public static class ModMain
         {
             if (modSetting.Name == "Input_InterceptPercent")
             {
-                TITTMod.instance.Settings.InterceptPercent = float.Parse(modSetting.Value);
+                TITTMod.Instance.Settings.InterceptPercent = float.Parse(modSetting.Value);
             }
 
             if (modSetting.Name == "Input_TreeCoverEff")
             {
-                TITTMod.instance.Settings.TreeCoverEff = int.Parse(modSetting.Value) / 100f;
+                TITTMod.Instance.Settings.TreeCoverEff = int.Parse(modSetting.Value) / 100f;
             }
 
             if (modSetting.Name == "Input_TreeCoverEffType")
             {
-                TITTMod.instance.Settings.TreeCoverEfficencyType =
+                TITTMod.Instance.Settings.TreeCoverEfficencyType =
                     (TreeCoverEffEnum)Enum.Parse(typeof(TreeCoverEffEnum), modSetting.Value);
             }
         }
