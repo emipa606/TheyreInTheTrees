@@ -1,9 +1,10 @@
 using System;
+using System.Linq;
 using HarmonyLib;
 
 namespace TITT;
 
-public class PatchApply
+public static class PatchApply
 {
     internal static void Apply()
     {
@@ -46,12 +47,9 @@ public class PatchApply
             return;
         }
 
-        foreach (var item2 in ObjGets.GetListAndTruncate(ObjGets.TreeList))
+        foreach (var item2 in ObjGets.GetListAndTruncate(ObjGets.TreeList).Where(x => x != null))
         {
-            if (item2 != null)
-            {
-                item2.fillPercent = ObjGets.OrigCover[item2];
-            }
+            item2.fillPercent = ObjGets.OrigCover[item2];
         }
     }
 

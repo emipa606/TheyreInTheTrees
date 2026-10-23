@@ -52,7 +52,7 @@ public static class ModMain
             }
         }
 
-        xml.Root.Element("TheyreInTheTrees")?.Remove();
+        xml.Root?.Element("TheyreInTheTrees")?.Remove();
         xml.Save(hugsLibConfig);
 
         Log.Message("[TheyreInTheTrees]: Imported old HugLib-settings");

@@ -76,7 +76,7 @@ public static class ObjGets
         GetListAndTruncate(thingDefs);
         foreach (var item in GetListAndTruncate(thingDefs))
         {
-            if (item.IsIngestible & (item.ingestible.foodType == FoodTypeFlags.Tree))
+            if (item.IsIngestible && item.ingestible.foodType == FoodTypeFlags.Tree)
             {
                 OrigCover[item] = item.fillPercent;
             }
